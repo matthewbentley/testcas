@@ -1,0 +1,10 @@
+[package]
+name = "testcas"
+version = "0.1.0"
+authors = ["Matthew Bentley <matthew.t.bentley@gmail.com>"]
+
+[dependencies]
+hyper = "*"
+
+[dependencies.cas]
+path = "/home/matthew/projects/rust/cas/"
