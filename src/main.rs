@@ -1,7 +1,7 @@
 extern crate cas;
 extern crate hyper;
 
-use cas::cas::{CasClient, ServiceResponse};
+use cas::{CasClient, ServiceResponse};
 use hyper::Server;
 use hyper::server::{Request, Response};
 use hyper::uri::RequestUri;
