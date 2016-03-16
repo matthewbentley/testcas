@@ -15,16 +15,16 @@ fn main() {
     let logout_path = "logout";
     let verify_path = "serviceValidate";
     let service_url = "http://test.case.edu:3000/complete";
-    let cas = CasClient::new(base_url, login_path, logout_path, verify_path,
-                             service_url).unwrap();
+    let cas = CasClient::new(base_url, login_path, logout_path, verify_path, service_url).unwrap();
 
-    Server::http("127.0.0.1:3000").unwrap()
+    Server::http("127.0.0.1:3000")
+        .unwrap()
         .handle(move |req: Request, mut res: Response| {
             let s = match req.uri.clone() {
                 RequestUri::AbsolutePath(s) => s,
                 RequestUri::AbsoluteUri(u) => u.serialize(),
                 RequestUri::Authority(s) => s,
-                RequestUri::Star => panic!("Nope!")
+                RequestUri::Star => panic!("Nope!"),
             };
             if s.as_str().starts_with("/complete") {
                 match cas.verify_from_request(&req).unwrap() {
@@ -58,9 +58,9 @@ fn main() {
                 }
             } else if s == "/" {
                 cas.login_redirect(res);
-                return();
+                return ();
             } else {
                 res.send(s.as_bytes());
             }
-    });
+        });
 }
